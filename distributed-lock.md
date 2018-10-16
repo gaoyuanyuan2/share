@@ -1,12 +1,13 @@
 # 分布式锁 
+## 概念
 <br>锁的目的是确保在可能尝试执行相同工作的多个节点中，只有一个节点实际执行(每次至少只有一个节点)。
 这项工作可能是向共享存储系统写入一些数据，执行一些计算，调用一些外部API或类似的东西。
-在较高的层次上，您可能需要在分布式应用程序中使用锁的原因有两个:为了效率或为了正确性。
+在较高的层次上，可能需要在分布式应用程序中使用锁的原因有两个:为了效率或为了正确性。
 <br><br>效率:使用锁可以避免不必要地重复同样的工作(例如一些昂贵的计算)。如果锁失败和两个节点做同样的事情,
 结果可能是多次支付或者收到多次邮件和微信通知等。
-正确性:使用锁可以防止并发进程竞争，扰乱系统的状态。如果锁失效，两个节点同时工作在同一条数据上，
+<br><br>正确性:使用锁可以防止并发进程竞争，扰乱系统的状态。如果锁失效，两个节点同时工作在同一条数据上，
 结果是文件损坏、数据丢失、永久不一致等一些严重问题。
-<br><br>如果使用锁仅仅是为了提高效率，那么就没有必要运行5台Redis服务器并检查大多数服务器是否获得锁而增加Redlock的成本和复杂性。
+<br><br>如果使用锁仅仅是为了提高效率，那么就没有必要运行多台Redis服务器并检查大多数服务器是否获得锁而增加Redlock的成本和复杂性。
 最好只使用一个Redis实例，也许可以使用异步复制到一个备用实例，以防主实例崩溃。
 
  [参考](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
@@ -73,8 +74,8 @@ public class RedisLock {
         if (locked) {
             throw new IllegalStateException("already locked!");
         }
-        locked = stringRedisTemplate.execute(SETNX_AND_EXPIRE_SCRIPT, Collections.singletonList(lockKey), lockValue,
-                                             String.valueOf(lockSeconds));
+        locked = stringRedisTemplate.execute(SETNX_AND_EXPIRE_SCRIPT, Collections.singletonList(lockKey),
+             lockValue,String.valueOf(lockSeconds));
         return locked;
     }
 
