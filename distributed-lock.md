@@ -9,7 +9,7 @@
 <br><br>如果使用锁仅仅是为了提高效率，那么就没有必要运行5台Redis服务器并检查大多数服务器是否获得锁而增加Redlock的成本和复杂性。
 最好只使用一个Redis实例，也许可以使用异步复制到一个备用实例，以防主实例崩溃。
 
- [参考][https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html]
+ [参考](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 ## 分布式锁实现分布式锁有几种方式 
 ### 1.  Redis SETNX
 ```java
