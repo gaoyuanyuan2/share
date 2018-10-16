@@ -12,7 +12,7 @@
 
  [参考](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html)
 ## 分布式锁实现分布式锁有几种方式 
-### 1.  Redis SETNX
+### 1、  Redis SETNX
 ```java
 public class RedisLock {
 
@@ -165,13 +165,13 @@ public class RedisLock {
     }
 }
 ```
-### 2.  数据库方式去实现 
+### 2、  数据库方式去实现 
 <br><br>1.  创建一个表， 通过索引唯一的方式 
 <br>create table (id , name …) name 
 <br>获取锁：insert一条数据 xxx
 <br>释放锁：delete 语句删除这条记录 
 <br><br>2.  Mysql For update 
-### 3.Zookeeper实现 
+### 3、  Zookeeper实现 
 ```java
 public class DistributeLock {
 
@@ -310,7 +310,7 @@ public class ZookeeperClient {
 }
 ```
 ### 4. 三种方案的比较
-<br><br>1.  从理解的难易程度角度（从低到高）
+<br>1.  从理解的难易程度角度（从低到高）
 <br>数据库 > 缓存 > Zookeeper
 <br><br>2.  从实现的复杂性角度（从低到高）
 <br>Zookeeper >= 缓存 > 数据库
