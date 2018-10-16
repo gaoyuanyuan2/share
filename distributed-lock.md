@@ -16,7 +16,7 @@
 ```java
 public class RedisLock {
 
-    private static final Logger logger = LoggerFactory.getLogger(RedisLock.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RedisLock.class);
 
     private final StringRedisTemplate stringRedisTemplate;
 
@@ -87,7 +87,7 @@ public class RedisLock {
         try {
             return doTryLock(lockSeconds);
         } catch (Exception e) {
-            logger.error("tryLock Error", e);
+            LOGGER.error("tryLock Error", e);
             return false;
         }
     }
@@ -110,13 +110,13 @@ public class RedisLock {
                     return true;
                 }
             } catch (Exception e) {
-                logger.error("tryLock Error", e);
+                LOGGER.error("tryLock Error", e);
                 return false;
             }
             try {
                 Thread.sleep(tryIntervalMillis);
             } catch (InterruptedException e) {
-                logger.error("tryLock interrupted", e);
+                LOGGER.error("tryLock interrupted", e);
                 return false;
             }
         }
