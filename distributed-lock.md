@@ -166,7 +166,7 @@ public class RedisLock {
 }
 ```
 ### 2、  数据库方式去实现 
-<br><br>1.  创建一个表， 通过索引唯一的方式 
+<br>1.  创建一个表， 通过索引唯一的方式 
 <br>create table (id , name …) name 
 <br>获取锁：insert一条数据 xxx
 <br>释放锁：delete 语句删除这条记录 
